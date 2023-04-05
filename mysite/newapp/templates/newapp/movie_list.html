@@ -9,11 +9,26 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+        <h1>Best movies</h1>
         {% for movie in movie_objects %}
             <h1>{{ movie.name }}</h1>
             <h2>{{ movie.duration }}</h2>
             <h3>{{ movie.ratings }}</h3>
+            <img src='{{ movie.image.url }}' height='150px'/>
         {% endfor %}
+       
+        <div>
+            {% if movie_objects.has_previous %}
+            <a href='?page=1'>First</a>
+            <a href='?page={{ movie_objects.previous_page_number }}'>Previous</a>
+            {% endif %}
+            Page: {{ movie_objects.number }} of {{ movie_objects.paginator.num_pages }}
+            {% if movie_objects.has_next %}
+                <a href='?page={{ movie_objects.next_page_number }}'>Next</a>
+                <a href='?page={{ movie_objects.num_pages }}'>Last</a>
+            {% endif %}
+        </div>
+        
         <script src="" async defer></script>
     </body>
 </html>
